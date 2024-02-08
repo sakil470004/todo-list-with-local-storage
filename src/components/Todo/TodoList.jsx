@@ -7,8 +7,10 @@ import {
   updatedTodosDB,
 } from "../../utilites/fakedb";
 import toast from "react-hot-toast";
+import { MdEdit } from "react-icons/md";
 
 export default function TodoList({ todos, setTodos }) {
+    const [edit, setEdit] = useState(false);
   const deleteSingleTodo = (id) => {
     removeSingleTodo(id);
     const storedTodos = getTodos();
@@ -52,19 +54,23 @@ export default function TodoList({ todos, setTodos }) {
                   <p
                     className={`${
                       todo.completed ? "line-through" : "t"
-                    } text-gray-800 max-w-full overflow-hidden`}
+                    } text-gray-800 max-w-full overflow-hidden p-2`}
+                  contentEditable={edit} suppressContentEditableWarning={true}
+                  
                   >
                     {todo.text}
                   </p>
                 </div>
-                <div>
+                <div className="flex flex-col gap-2 text-lg items-center justify-center">
+                  <MdEdit onClick={()=>setEdit(true)}/>
                   <IoTrashBin
                     onClick={() => {
                       deleteSingleTodo(todo.id);
                     }}
                     title="Delete Todo"
-                    className="text-2xl text-error cursor-pointer"
+                    className=" text-error cursor-pointer"
                   />
+
                 </div>
               </div>
             </li>

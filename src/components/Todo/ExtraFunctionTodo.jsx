@@ -24,8 +24,8 @@ export default function ExtraFunctionTodo({ todos, setTodos }) {
   }
   return (
     <div className="shadow-md px-5 py-2 relative">
-      <MdPendingActions className="text-2xl text-orange-500 absolute -top-2 -left-1" />
-      <div className="flex items-center justify-between gap-3 ml-3">
+      <MdPendingActions className="text-2xl text-gray-500 absolute -top-2 -right-1" />
+      <div className="flex items-center justify-between gap-3 ">
         <button
           onClick={() => deleteAll()}
           className="btn btn-error btn-outline btn-sm"
