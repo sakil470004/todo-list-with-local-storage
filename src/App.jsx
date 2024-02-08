@@ -1,18 +1,18 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import Navbar from './components/Navbar/Navbar'
-import AddTodo from './components/Todo/AddTodo'
+
+import "./App.css";
+import Navbar from "./components/Navbar/Navbar";
+import AddTodo from "./components/Todo/AddTodo";
+import { Toaster } from "react-hot-toast";
 
 function App() {
-
   return (
-    <div data-theme="light" className=' h-screen'>
-      <Navbar/>
-      <AddTodo/>
+    <div data-theme="light" className=" h-screen">
+      <Navbar />
+      <AddTodo />
+      {/* for toast */}
+      <Toaster position="top-right" reverseOrder={false} />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

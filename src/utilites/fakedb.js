@@ -1,44 +1,39 @@
 // use local storage to manage cart data
-const addToDb = id => {
-    let shoppingCart = getShoppingCart();
-    // add quantity
-    const quantity = shoppingCart[id];
-    if (!quantity) {
-        shoppingCart[id] = 1;
-    }
-    else {
-        const newQuantity = quantity + 1;
-        shoppingCart[id] = newQuantity;
-    }
-    localStorage.setItem('shopping-cart', JSON.stringify(shoppingCart));
-}
+const addToDb = (todo) => {
+  let todos = getTodos();
+  let newTodos = [];
+  if (todo.length === 0) {
+    todos = todo;
+  } else {
+    newTodos = [...todos, todo];
+    todos = newTodos;
+  }
+  localStorage.setItem("todo-list", JSON.stringify(todos));
+};
 
-const removeFromDb = id => {
-    const shoppingCart = getShoppingCart();
-    if (id in shoppingCart) {
-        delete shoppingCart[id];
-        localStorage.setItem('shopping-cart', JSON.stringify(shoppingCart));
-    }
-}
+const removeSingleTodo = (id) => {
+  const todos = getTodos();
+  // filter out the item to be removed
+  const newTodos = todos.filter((todo) => todo.id !== id);
+  localStorage.setItem("todo-list", JSON.stringify(newTodos));
+};
 
-const getShoppingCart = () => {
-    let shoppingCart = {};
+const getTodos = () => {
+  const storedTodo = JSON.parse(localStorage.getItem("todo-list")) || [];
+  return storedTodo;
+};
 
-    //get the shopping cart from local storage
-    const storedCart = localStorage.getItem('shopping-cart');
-    if (storedCart) {
-        shoppingCart = JSON.parse(storedCart);
-    }
-    return shoppingCart;
-}
-
-const deleteShoppingCart = () => {
-    localStorage.removeItem('shopping-cart');
+const deleteAllTodos = () => {
+  localStorage.removeItem("todo-list");
+};
+const updatedTodosDB = (todos) => {
+  localStorage.setItem("todo-list", JSON.stringify(todos));
 }
 
 export {
-    addToDb,
-    removeFromDb,
-    getShoppingCart,
-    deleteShoppingCart
-}
+  addToDb,
+  removeSingleTodo ,
+  getTodos ,
+  deleteAllTodos ,
+  updatedTodosDB  ,
+};
